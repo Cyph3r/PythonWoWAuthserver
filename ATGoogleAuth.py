@@ -1,4 +1,9 @@
-import hmac, base64, struct, hashlib, time
+import hmac
+import base64
+import struct
+import hashlib
+import time
+
 
 def get_hotp_token(secret, intervals_no):
     key = base64.b32decode(secret, True)
@@ -7,6 +12,7 @@ def get_hotp_token(secret, intervals_no):
     o = ord(h[19]) & 15
     h = (struct.unpack(">I", h[o:o+4])[0] & 0x7fffffff) % 1000000
     return h
+
 
 def ATGoogleAuth(secret, password):
     tick = int(time.time()) / 30
