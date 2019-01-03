@@ -21,7 +21,7 @@ class TCAuthClient:
         self.db = dbpool
         self.authenticator = None
         
-        self.crypt_N = TCBigNumber()
+        self.crypt_N = TCBigNumber()s
         self.crypt_g = TCBigNumber()
         self.crypt_v = TCBigNumber()
         self.crypt_s = TCBigNumber()
