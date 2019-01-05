@@ -1,5 +1,6 @@
 import random
 
+
 class TCBigNumber:
     def __init__(self):
         self.val = 0
@@ -26,7 +27,8 @@ class TCBigNumber:
         self.len = len(i)
 
     def SetRand(self, l):
-        self.SetHex(''.join(chr(random.randrange(0, 255)) for _ in range(l)).encode('hex'))
+        self.SetHex(''.join(chr(random.randrange(0, 255))
+                            for _ in range(l)).encode('hex'))
 
     def StripHex(self, h):
         h = h.lower()
@@ -50,7 +52,7 @@ class TCBigNumber:
     def GetInt(self):
         return self.val
 
-    def GetBytes(self, l = 0, rev = False):
+    def GetBytes(self, l=0, rev=False):
         ret = self.GetHex()
         if l:
             while len(ret) < l * 2:
