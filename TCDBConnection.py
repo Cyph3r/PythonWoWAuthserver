@@ -1,28 +1,30 @@
 import MySQLdb
 
+
 class TCDBConnection:
     MAX_ERROR_RETRIES = 5
-    
+
     def __init__(self):
         self.db = None
-    
+
     # Returns true if error handled and operation can be retried
     def HandleError(self, e):
         if e == 2006 or e == 2003:
             return self.Connect(self.host, self.user, self.password, self.database)
         print "Unhandled MySQL error: {}".format(e)
         return False
-    
+
     def Disconnect(self):
         self.db = None
-    
-    def Connect(self, _host, _user, _password, _database, retry = 0):
+
+    def Connect(self, _host, _user, _password, _database, retry=0):
         self.host = _host
         self.user = _user
         self.password = _password
         self.database = _database
         try:
-            self.db = MySQLdb.connect(host=_host, user=_user, passwd=_password, db=_database)
+            self.db = MySQLdb.connect(
+                host=_host, user=_user, passwd=_password, db=_database)
         except MySQLdb.OperationalError as e:
             if retry > self.MAX_ERROR_RETRIES:
                 print "TCDBConnection:Connect failed: Retry count exceeded (MySQL error {})".format(e[0])
@@ -34,8 +36,8 @@ class TCDBConnection:
                 return False
         self.db.autocommit(True)
         return True
-    
-    def QueryOne(self, query, args = None, retry = 0):
+
+    def QueryOne(self, query, args=None, retry=0):
         if self.db == None:
             return None
         try:
@@ -50,8 +52,8 @@ class TCDBConnection:
                 print "TCDBConnection:QueryOne failed: Error not handled (MySQL error {})".format(e[0])
                 return None
         return c.fetchone()
-    
-    def QueryAll(self, query, args = None, retry = 0):
+
+    def QueryAll(self, query, args=None, retry=0):
         if self.db == None:
             return None
         try:
