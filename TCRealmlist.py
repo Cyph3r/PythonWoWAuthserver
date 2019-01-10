@@ -1,4 +1,4 @@
-import threading
+simport threading
 from TCAuthSettings import TCAuthSettings, Debug
 import time
 
