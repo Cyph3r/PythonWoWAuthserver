@@ -8,6 +8,7 @@ import time
 from copy import deepcopy
 from ATGoogleAuth import ATGoogleAuth
 
+
 class TCAuthClient:
     def __init__(self, sock, address, server, dbpool):
         self.server = server
